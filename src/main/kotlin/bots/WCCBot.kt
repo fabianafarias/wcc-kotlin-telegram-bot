@@ -7,6 +7,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.InputFile
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException
+import java.awt.Image
+import java.io.File
+import javax.swing.ImageIcon
 
 class WCCBot : TelegramLongPollingBot() {
 
@@ -99,7 +102,7 @@ class WCCBot : TelegramLongPollingBot() {
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Nossas marcas: https://www.natura.com.br/nossas-marcas?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://abre.ai/dx9J")
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/hMcwSWaRU3XyT8wdxp/giphy.gif")
                 }
                 execute(sendMessage)
             }
@@ -118,15 +121,14 @@ class WCCBot : TelegramLongPollingBot() {
                 val sendDocument = SendDocument().apply {
                     this.chatId = chatId
                     this.document = InputFile().setMedia("https://media.giphy.com/media/2oUfJzyXFg6FVgqU0i/giphy.gif")
-                    this.parseMode = "MarkdownV2"
                 }
                 execute(sendDocument)
 
                 val sendMessage = SendMessage().apply {
                     this.chatId = chatId
                     this.text = """
-                    *Olá $nameSander\!* 
-                    *Em que posso te ajudar\?* 
+                    *Olá $nameSander\!*
+                    *Em que posso te ajudar\?*
                     *Escolha na lista abaixo\:*
                                         
                     /promocoes
