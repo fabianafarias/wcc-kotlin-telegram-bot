@@ -18,7 +18,7 @@ fun main() {
     try {
         botsApi.registerBot(WCCBot())
 
-        log.info("Se Cuide Bot is up")
+        log.info("Fabiana Farias Bot is up")
     } catch (e: TelegramApiException) {
         e.printStackTrace()
 

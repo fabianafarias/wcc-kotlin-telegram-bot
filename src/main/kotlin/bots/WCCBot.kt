@@ -14,15 +14,12 @@ class WCCBot : TelegramLongPollingBot() {
     override fun getBotUsername(): String {
         //return bot username
         // If bot username is @HelloKotlinBot, it must return
-        return "@secuide_bot"
+        return "@fabianafarias_bot"
     }
-
-    // Add our bot to a channel
-
 
     override fun getBotToken(): String {
         // Return bot token from BotFather
-        return "2138831054:AAH0bI1F6pq4pRM9X0oHpDXE60JYfw0XC7E"
+        return "2128504768:AAEkicAGfQVM5rKVHi3dP8Oi_T1vHnS-dRg"
     }
 
     override fun onUpdateReceived(update: Update?) {
@@ -33,71 +30,71 @@ class WCCBot : TelegramLongPollingBot() {
 
         try {
 
-            if (messageCommand == "/promocoes"){
+            if (messageCommand == "/promocoes"||messageCommand =="/promocoes@fabianafarias_bot"){
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Tudo em promoções: https://www.natura.com.br/c/tudo-em-promocoes"
-                    this.document = InputFile().setMedia("https://abre.ai/dx9O")
+                    this.document = InputFile().setMedia("https://abre.ai/dycD")
                 }
                 execute(sendMessage)
 
-            } else if(messageCommand == "/presentes") {
+            } else if(messageCommand == "/presentes"||messageCommand =="/presentes@fabianafarias_bot") {
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Tudo em presentes: https://www.natura.com.br/c/tudo-em-presentes"
-                    this.document = InputFile().setMedia("https://abre.ai/dx8Z")
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/MUxetIxoAhsLgb6UD0/giphy.gif")
                 }
                 execute(sendMessage)
             }
-            else if(messageCommand == "/perfumaria") {
+            else if(messageCommand == "/perfumaria" ||messageCommand =="/perfumaria@fabianafarias_bot") {
 
             val sendMessage = SendDocument().apply {
                 this.chatId = chatId
                 this.caption = "Tudo em perfumaria: https://www.natura.com.br/c/tudo-em-perfumaria"
-                this.document = InputFile().setMedia("https://abre.ai/dx89")
+                this.document = InputFile().setMedia("https://media.giphy.com/media/jRZXphYJNLtdEeYJBO/giphy.gif")
             }
             execute(sendMessage)
             }
-            else if(messageCommand == "/corpoebanho") {
+            else if(messageCommand == "/corpoebanho"||messageCommand =="/corpoebanho@fabianafarias_bot") {
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Tudo em corpo e banho: https://www.natura.com.br/c/tudo-em-corpo-e-banho?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://abre.ai/dx9k")
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/1BfwFBvHXH6QGRcRyd/giphy.gif")
                 }
                 execute(sendMessage)
             }
-            else if(messageCommand == "/cabelos") {
+            else if(messageCommand == "/cabelos"||messageCommand =="/cabelos@fabianafarias_bot" ) {
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Tudo em cabelos: https://www.natura.com.br/c/tudo-em-corpo-e-banho?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://abre.ai/dx9D")
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/kHOANJDT1HJV6JhbKm/giphy.gif")
                 }
                 execute(sendMessage)
             }
-            else if(messageCommand == "/rosto") {
+            else if(messageCommand == "/rosto"||messageCommand =="/rosto@fabianafarias_bot") {
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Tudo em rosto: https://www.natura.com.br/c/tudo-em-rosto?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://abre.ai/dx9F")
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/YlmliMCSLsCwOsafyY/giphy.gif")
                 }
                 execute(sendMessage)
             }
-            else if(messageCommand == "/maquiagem") {
+            else if(messageCommand == "/maquiagem" ||messageCommand =="/maquiagem@fabianafarias_bot") {
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Tudo em maquiagem: https://www.natura.com.br/c/tudo-em-maquiagem?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://abre.ai/dx9T")
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/5zjdEUp4UrO8VsIhHK/giphy.gif")
                 }
                 execute(sendMessage)
             }
 
-            else if(messageCommand == "/marcas") {
+            else if(messageCommand == "/marcas"||messageCommand =="/marcas@fabianafarias_bot") {
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
@@ -107,25 +104,32 @@ class WCCBot : TelegramLongPollingBot() {
                 execute(sendMessage)
             }
 
-            else if(messageCommand == "/destaques") {
+            else if(messageCommand == "/destaques"||messageCommand =="/destaques@fabianafarias_bot") {
 
                 val sendMessage = SendDocument().apply {
                     this.chatId = chatId
                     this.caption = "Destaques de consultoria: https://www.natura.com.br/c/destaques?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://abre.ai/dx8P")
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/5BFIypSRBD907oPHuB/giphy.gif")
                 }
                 execute(sendMessage)
             }
 
             else {
+                val sendDocument = SendDocument().apply {
+                    this.chatId = chatId
+                    this.document = InputFile().setMedia("https://media.giphy.com/media/2oUfJzyXFg6FVgqU0i/giphy.gif")
+                    this.parseMode = "MarkdownV2"
+                }
+                execute(sendDocument)
+
                 val sendMessage = SendMessage().apply {
                     this.chatId = chatId
                     this.text = """
-                    *Olá $nameSander\!*
-                    *O que você procura?*
-                    *Escolha uma das opções abaixo\:*
-
-                     /promocoes
+                    *Olá $nameSander\!* 
+                    *Em que posso te ajudar\?* 
+                    *Escolha na lista abaixo\:*
+                                        
+                    /promocoes
                      /presentes
                      /perfumaria
                      /corpoebanho
@@ -134,8 +138,9 @@ class WCCBot : TelegramLongPollingBot() {
                      /maquiagem
                      /marcas
                      /destaques
-                """.trimIndent()
+                    """.trimIndent()
                     this.parseMode  = "MarkDownV2"
+
                 }
                 execute(sendMessage)
             }
