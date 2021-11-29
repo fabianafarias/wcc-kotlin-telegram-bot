@@ -1,132 +1,136 @@
 package bots
 
+import BOT_TOKEN
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
-
 import org.telegram.telegrambots.meta.api.objects.InputFile
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException
-import java.awt.Image
-import java.io.File
-import javax.swing.ImageIcon
 
 class WCCBot : TelegramLongPollingBot() {
 
-
     override fun getBotUsername(): String {
-        //return bot username
+        // return bot username
         // If bot username is @HelloKotlinBot, it must return
-        return "@fabianafarias_bot"
+        return "@consultoraNatura_bot"
     }
 
     override fun getBotToken(): String {
         // Return bot token from BotFather
-        return [BOT TOKEN]
+        return BOT_TOKEN
     }
+
+    private val sendDocument = SendDocument()
+    private val sendMessage = SendMessage()
 
     override fun onUpdateReceived(update: Update?) {
         // We check if the update has a message and the message has text
         val chatId = update?.message?.chatId.toString()
         val nameSander = update?.message?.from?.firstName
-        val messageCommand = update?.message?.text?.lowercase()
+        val messageCommand: String? = update?.message?.text?.lowercase()
 
         try {
 
-            if (messageCommand == "/promocoes"||messageCommand =="/promocoes@fabianafarias_bot"){
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Tudo em promoções: https://www.natura.com.br/c/tudo-em-promocoes"
-                    this.document = InputFile().setMedia("https://abre.ai/dycD")
+            when (messageCommand) {
+                "/promocoes" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption = "Tudo em promoções: https://www.natura.com.br/c/tudo-em-promocoes"
+                        this.document = InputFile().setMedia("https://abre.ai/dycD")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-
-            } else if(messageCommand == "/presentes"||messageCommand =="/presentes@fabianafarias_bot") {
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Tudo em presentes: https://www.natura.com.br/c/tudo-em-presentes"
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/MUxetIxoAhsLgb6UD0/giphy.gif")
+                "/presentes" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption = "Tudo em presentes: https://www.natura.com.br/c/tudo-em-presentes"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/MUxetIxoAhsLgb6UD0/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-            }
-            else if(messageCommand == "/perfumaria" ||messageCommand =="/perfumaria@fabianafarias_bot") {
-
-            val sendMessage = SendDocument().apply {
-                this.chatId = chatId
-                this.caption = "Tudo em perfumaria: https://www.natura.com.br/c/tudo-em-perfumaria"
-                this.document = InputFile().setMedia("https://media.giphy.com/media/jRZXphYJNLtdEeYJBO/giphy.gif")
-            }
-            execute(sendMessage)
-            }
-            else if(messageCommand == "/corpoebanho"||messageCommand =="/corpoebanho@fabianafarias_bot") {
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Tudo em corpo e banho: https://www.natura.com.br/c/tudo-em-corpo-e-banho?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/1BfwFBvHXH6QGRcRyd/giphy.gif")
+                "/perfumaria" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption = "Tudo em perfumaria: https://www.natura.com.br/c/tudo-em-perfumaria"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/jRZXphYJNLtdEeYJBO/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-            }
-            else if(messageCommand == "/cabelos"||messageCommand =="/cabelos@fabianafarias_bot" ) {
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Tudo em cabelos: https://www.natura.com.br/c/tudo-em-corpo-e-banho?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/kHOANJDT1HJV6JhbKm/giphy.gif")
+                "/corpoebanho" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption =
+                            "Tudo em corpo e banho: https://www.natura.com.br/c/tudo-em-corpo-e-banho?consultoria=fabianamfarias"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/1BfwFBvHXH6QGRcRyd/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-            }
-            else if(messageCommand == "/rosto"||messageCommand =="/rosto@fabianafarias_bot") {
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Tudo em rosto: https://www.natura.com.br/c/tudo-em-rosto?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/YlmliMCSLsCwOsafyY/giphy.gif")
+                "/cabelos" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption =
+                            "Tudo em cabelos: https://www.natura.com.br/c/tudo-em-corpo-e-banho?consultoria=fabianamfarias"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/kHOANJDT1HJV6JhbKm/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-            }
-            else if(messageCommand == "/maquiagem" ||messageCommand =="/maquiagem@fabianafarias_bot") {
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Tudo em maquiagem: https://www.natura.com.br/c/tudo-em-maquiagem?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/5zjdEUp4UrO8VsIhHK/giphy.gif")
+                "/rosto" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption =
+                            "Tudo em rosto: https://www.natura.com.br/c/tudo-em-rosto?consultoria=fabianamfarias"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/YlmliMCSLsCwOsafyY/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-            }
-
-            else if(messageCommand == "/marcas"||messageCommand =="/marcas@fabianafarias_bot") {
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Nossas marcas: https://www.natura.com.br/nossas-marcas?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/hMcwSWaRU3XyT8wdxp/giphy.gif")
+                "/maquiagem" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption =
+                            "Tudo em maquiagem: https://www.natura.com.br/c/tudo-em-maquiagem?consultoria=fabianamfarias"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/5zjdEUp4UrO8VsIhHK/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-            }
-
-            else if(messageCommand == "/destaques"||messageCommand =="/destaques@fabianafarias_bot") {
-
-                val sendMessage = SendDocument().apply {
-                    this.chatId = chatId
-                    this.caption = "Destaques de consultoria: https://www.natura.com.br/c/destaques?consultoria=fabianamfarias"
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/5BFIypSRBD907oPHuB/giphy.gif")
+                "/marcas" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption =
+                            "Nossas marcas: https://www.natura.com.br/nossas-marcas?consultoria=fabianamfarias"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/hMcwSWaRU3XyT8wdxp/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendMessage)
-            }
-
-            else {
-                val sendDocument = SendDocument().apply {
-                    this.chatId = chatId
-                    this.document = InputFile().setMedia("https://media.giphy.com/media/2oUfJzyXFg6FVgqU0i/giphy.gif")
+                "/destaques" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption =
+                            "Destaques de consultoria: https://www.natura.com.br/c/destaques?consultoria=fabianamfarias"
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/5BFIypSRBD907oPHuB/giphy.gif")
+                    }
+                    execute(sendDocument)
                 }
-                execute(sendDocument)
 
-                val sendMessage = SendMessage().apply {
-                    this.chatId = chatId
-                    this.text = """
+                else -> {
+                    val sendDocument = SendDocument().apply {
+                        this.chatId = chatId
+                        this.document =
+                            InputFile().setMedia("https://media.giphy.com/media/2oUfJzyXFg6FVgqU0i/giphy.gif")
+                    }
+                    execute(sendDocument)
+
+                    sendMessage.apply {
+                        this.chatId = chatId
+                        this.text = """
                     *Olá $nameSander\!*
                     *Em que posso te ajudar\?*
                     *Escolha na lista abaixo\:*
@@ -140,15 +144,14 @@ class WCCBot : TelegramLongPollingBot() {
                      /maquiagem
                      /marcas
                      /destaques
-                    """.trimIndent()
-                    this.parseMode  = "MarkDownV2"
-
+                        """.trimIndent()
+                        this.parseMode = "MarkDownV2"
+                    }
+                    execute(sendMessage)
                 }
-                execute(sendMessage)
             }
         } catch (e: TelegramApiException) {
             e.printStackTrace()
         }
     }
 }
-

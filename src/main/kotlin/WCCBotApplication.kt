@@ -18,11 +18,10 @@ fun main() {
     try {
         botsApi.registerBot(WCCBot())
 
-        log.info("Fabiana Farias Bot is up")
+        log.info("Consultora Natura Bot")
     } catch (e: TelegramApiException) {
         e.printStackTrace()
 
         log.error("Telegram API failure", e)
     }
-
 }
