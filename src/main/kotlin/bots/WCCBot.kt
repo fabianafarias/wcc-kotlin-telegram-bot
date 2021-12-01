@@ -3,7 +3,7 @@ package bots
 import BOT_TOKEN
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage
+import org.telegram.telegrambots.meta.api.methods.send.SendVideo
 import org.telegram.telegrambots.meta.api.objects.InputFile
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException
@@ -21,18 +21,45 @@ class WCCBot : TelegramLongPollingBot() {
         return BOT_TOKEN
     }
 
-    private val sendDocument = SendDocument()
-    private val sendMessage = SendMessage()
-
     override fun onUpdateReceived(update: Update?) {
         // We check if the update has a message and the message has text
         val chatId = update?.message?.chatId.toString()
         val nameSander = update?.message?.from?.firstName
         val messageCommand: String? = update?.message?.text?.lowercase()
 
+        val sendDocument = SendDocument()
+        val sendVideo= SendVideo()
+
+        val welcomeMessage = """
+        *Olá $nameSander\!*
+        *Sou Fabiana, sua Consultora Natura\.*
+        *Se quiser ir direto para o site Natura, escolha a primeira opção do menu "/espacoNatura"*
+        
+        \/espacoNatura \- Visite meu espaço no portal da Natura        
+        \/promocoes \- Promoções no site Natura
+        \/presentes \- Presentes no site Natura
+        \/perfumaria \- Perfumaria no site Natura
+        \/corpoebanho \- Corpo e Banho no site Natura
+        \/cabelos \- Cabelos no site Natura
+        \/rosto \- Rosto no site Natura
+        \/maquiagem \- Maquiagem no site Natura
+        \/marcas \- Marcas no site Natura
+        \/destaques \- Destaques no site Natura
+        \/baixarApp \- Baixe o App Natura
+        \/comprandoNoApp \- Como comprar pelo App
+         """.trimIndent()
+
         try {
 
             when (messageCommand) {
+                "/espacoNatura" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption = "Meu espaço Natura: https://www.natura.com.br/consultoria/fabianamfarias"
+                        this.document = InputFile().setMedia("https://media.giphy.com/media/5BFIypSRBD907oPHuB/giphy.gif")
+                    }
+                    execute(sendDocument)
+                }
                 "/promocoes" -> {
                     sendDocument.apply {
                         this.chatId = chatId
@@ -115,41 +142,44 @@ class WCCBot : TelegramLongPollingBot() {
                         this.caption =
                             "Destaques de consultoria: https://www.natura.com.br/c/destaques?consultoria=fabianamfarias"
                         this.document =
-                            InputFile().setMedia("https://media.giphy.com/media/5BFIypSRBD907oPHuB/giphy.gif")
+                            InputFile().setMedia("")
                     }
                     execute(sendDocument)
+                }
+
+                "/baixarApp" -> {
+                    sendDocument.apply {
+                        this.chatId = chatId
+                        this.caption =
+                            "Baixe aqui o App Natura: https://www.play.google.com/store/apps/details?id=net.natura.semprepresente&referrer=utm_source%3Drede_natura_mobile%26utm_medium%3Dbotao_google_play"
+                        this.document =
+                            InputFile().setMedia("")
+                        this.parseMode = "MarkDownV2"
+                    }
+                    execute(sendDocument)
+                }
+                "/comprandoNoApp" -> {
+                    sendVideo.apply {
+                        this.chatId = chatId
+                        this.video = InputFile().setMedia(java.io.File("src/main/resources/naturaApp.mp4"))
+                        this.caption = "Aprenda como usar o app Natura"
+                        this.parseMode = "MarkDownV2"
+                    }
+                    execute(sendVideo)
                 }
 
                 else -> {
-                    val sendDocument = SendDocument().apply {
+                    sendDocument.apply {
                         this.chatId = chatId
-                        this.document =
-                            InputFile().setMedia("https://media.giphy.com/media/2oUfJzyXFg6FVgqU0i/giphy.gif")
-                    }
-                    execute(sendDocument)
-
-                    sendMessage.apply {
-                        this.chatId = chatId
-                        this.text = """
-                    *Olá $nameSander\!*
-                    *Em que posso te ajudar\?*
-                    *Escolha na lista abaixo\:*
-                                        
-                    /promocoes
-                     /presentes
-                     /perfumaria
-                     /corpoebanho
-                     /cabelos
-                     /rosto
-                     /maquiagem
-                     /marcas
-                     /destaques
-                        """.trimIndent()
+                        this.caption = welcomeMessage
+                        this.document = InputFile().setMedia("https://media.giphy.com/media/2oUfJzyXFg6FVgqU0i/giphy.gif")
                         this.parseMode = "MarkDownV2"
+                        }
+                        execute(sendDocument)
                     }
-                    execute(sendMessage)
+
                 }
-            }
+
         } catch (e: TelegramApiException) {
             e.printStackTrace()
         }
