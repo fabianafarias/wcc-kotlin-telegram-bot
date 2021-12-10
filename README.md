@@ -1,5 +1,9 @@
-# wcc-kotlin-telegram-bot
-Criação de um bot para o Telegram com Kotlin.
+##wcc-kotlin-telegram-bot
+Criação de um bot para o Telegram com a linguagem Kotlin.
 
-- Criação do bot com @BotFather
-- Programação em Kotlin com Intellij
+##Tecnologias usadas:
+
+- Telegram Bot Api
+- Emoji Java
+- Gradle 7.3
+- Kotlin 1.5.31
